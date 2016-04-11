@@ -1,0 +1,24 @@
+package {package};
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import nl.topicus.onderwijs.simpleproject.BaseTest;
+
+public class {className} extends BaseTest
+{
+	private String testPath = "{relativeSourceFilePath}";
+
+	@Test
+	public void firstStep()
+	{
+		readTest(testPath);
+		Assert.assertEquals(true, true);
+	}
+	
+	@Test
+	public void secondStep()
+	{
+		Assert.assertEquals(1, 1);
+	}
+}
