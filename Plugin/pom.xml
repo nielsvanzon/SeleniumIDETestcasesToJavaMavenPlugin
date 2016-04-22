@@ -12,27 +12,27 @@
 	<artifactId>selenium-ide-testcases-to-java-maven-plugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
-	
+
 	<name>Selenium IDE testcases to java maven plugin</name>
 	<description>Generator that makes java test files out of selenium IDE testcases</description>
 	<organization>
 		<name>Topicus Onderwijs B.V.</name>
 		<url>http://www.topicus.nl/onderwijs</url>
 	</organization>
-	
+
 	<inceptionYear>2016</inceptionYear>
 
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin/issues</url>
 	</issueManagement>
-	
+
 	<scm>
 		<url>https://github.com/nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin</url>
 		<connection>scm:git:git@github.com:nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin.git</connection>
 		<tag>HEAD</tag>
 	</scm>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>topicus-repo</id>
@@ -49,18 +49,33 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.maven.plugin-tools</groupId>
-			<artifactId>maven-plugin-annotations</artifactId>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.plexus</groupId>
+			<artifactId>plexus-build-api</artifactId>
 		</dependency>
 	</dependencies>
 
