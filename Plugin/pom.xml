@@ -1,11 +1,68 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>nl.topicus.onderwijs.parent</groupId>
+		<artifactId>onderwijs-parent-base</artifactId>
+		<version>2016.3.1</version>
+	</parent>
+
 	<groupId>nl.topicus.onderwijs</groupId>
 	<artifactId>selenium-ide-testcases-to-java-maven-plugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<packaging>maven-plugin</packaging>
+	
+	<name>Selenium IDE testcases to java maven plugin</name>
+	<description>Generator that makes java test files out of selenium IDE testcases</description>
+	<organization>
+		<name>Topicus Onderwijs B.V.</name>
+		<url>http://www.topicus.nl/onderwijs</url>
+	</organization>
+	
+	<inceptionYear>2016</inceptionYear>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin/issues</url>
+	</issueManagement>
+	
+	<scm>
+		<url>https://github.com/nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin</url>
+		<connection>scm:git:git@github.com:nielsvanzon/SeleniumIDETestcasesToJavaMavenPlugin.git</connection>
+		<tag>HEAD</tag>
+	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>topicus-repo</id>
+			<name>topicus-repo.local-releases</name>
+			<url>http://repo-onderwijs.topicus.local/artifactory/plugins-releases-local</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>topicus-repo</id>
+			<url>http://repo-onderwijs.topicus.local/artifactory/plugins-snapshots-local</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<pluginManagement>
@@ -26,14 +83,8 @@
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-plugin-plugin</artifactId>
-					<version>3.4</version>
-					<executions>
-						<execution>
-							<id>default-descriptor</id>
-							<phase>process-classes</phase>
-						</execution>
-					</executions>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
 				</plugin>
 
 				<plugin>
@@ -49,7 +100,20 @@
 					</configuration>
 				</plugin>
 
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>3.4</version>
+					<executions>
+						<execution>
+							<id>default-descriptor</id>
+							<phase>process-classes</phase>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -83,27 +147,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<dependencies>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>3.3.9</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.maven.plugin-tools</groupId>
-			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.4</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
 
 </project>
