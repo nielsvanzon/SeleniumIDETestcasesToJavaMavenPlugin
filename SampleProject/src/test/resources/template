@@ -3,7 +3,7 @@ package {package};
 import org.junit.Assert;
 import org.junit.Test;
 
-import nl.topicus.onderwijs.simpleproject.BaseTest;
+import nl.topicus.onderwijs.sampleproject.BaseTest;
 
 public class {className} extends BaseTest
 {
