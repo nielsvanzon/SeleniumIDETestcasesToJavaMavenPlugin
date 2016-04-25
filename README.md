@@ -1,7 +1,7 @@
 # SeleniumIDETestcasesToJavaMavenPlugin
 Selenium IDE testcases to java maven plugin
 
-Releasen
+Releasen plugin
 =========
 
 * mvn release:prepare 
