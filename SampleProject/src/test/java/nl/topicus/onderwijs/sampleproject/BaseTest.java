@@ -12,9 +12,9 @@ public abstract class BaseTest
 {
 	private static int count = 0;
 
-	protected void readTest(String location)
+	protected void readTest(URL url)
 	{
-		URL url = BaseTest.class.getResource("/testcases/" + location);
+		System.out.println("==> "  + url);
 
 		List<String> lines;
 
@@ -36,6 +36,12 @@ public abstract class BaseTest
 
 		count++;
 
+	}
+	
+
+	public void performStep(String command, String path, String arg)
+	{
+		System.out.println("command: " + command + " path: " + path + " arg: " + arg);
 	}
 
 	public static int getCount()

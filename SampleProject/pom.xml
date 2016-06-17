@@ -10,7 +10,7 @@
 			<plugin>
 				<groupId>nl.topicus.onderwijs</groupId>
 				<artifactId>selenium-ide-testcases-to-java-maven-plugin</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
+				<version>0.0.3-SNAPSHOT</version>
 
 				<configuration>
 					<testcasesSourceDirectory>src/test/resources/testcases</testcasesSourceDirectory>
@@ -137,7 +137,7 @@
 				<version>4.12</version>
 				<scope>test</scope>
 			</dependency>
-
+			
 		</dependencies>
 	</dependencyManagement>
 

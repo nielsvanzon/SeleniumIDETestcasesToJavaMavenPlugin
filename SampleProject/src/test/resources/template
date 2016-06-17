@@ -12,8 +12,7 @@ public class {className} extends BaseTest
 	@Test
 	public void firstStep()
 	{
-		readTest(testPath);
-		Assert.assertEquals(true, true);
+		{steps}
 	}
 	
 	@Test

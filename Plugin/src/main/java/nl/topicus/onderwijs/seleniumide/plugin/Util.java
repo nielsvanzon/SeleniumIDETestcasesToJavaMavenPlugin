@@ -1,6 +1,7 @@
 package nl.topicus.onderwijs.seleniumide.plugin;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -10,11 +11,16 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Util
 {
@@ -85,27 +91,62 @@ public class Util
 						i,
 						lines.get(i).replace("{asoluteTargetFilePath}",
 							asoluteTargetFilePath.replace(SEPERATOR, "/")));
+					lines.set(i, lines.get(i).replace("{testcaseFile}", packageString));
+					lines.set(i, lines.get(i).replace("{steps}", createPerformSteps(file)));
 				}
 
-				log.info("Saving java file at: " + asoluteTargetFilePath);
+				File htmlCopyTargetFile = new File(asoluteTargetFilePath.replace(".java", ".html"));
+				log.info("Copying html file at: " + htmlCopyTargetFile.getPath());
+				htmlCopyTargetFile.getParentFile().mkdirs();
+				Files.copy(file.toPath(), htmlCopyTargetFile.toPath());
 
 				File targetFile = new File(asoluteTargetFilePath);
-				targetFile.getParentFile().mkdirs();
+				log.info("Saving java file at: " + asoluteTargetFilePath);
 				Files.write(targetFile.toPath(), lines, Charset.forName("UTF-8"));
-
-				Files.copy(file.toPath(),
-					new File(asoluteTargetFilePath.replace(".java", ".html")).toPath());
 
 				count++;
 			}
 
-			log.info("Generated " + count + " java test files");
+			log.info("Generated " + count + " java test file(s) and copied " + count
+				+ " testcase(s)");
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
+	}
+
+	private static String createPerformSteps(File testcaseFile)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		try
+		{
+			Document doc =
+				Jsoup.parse(IOUtils.toString(new FileInputStream(testcaseFile), "UTF-8"));
+			for (Element table : doc.select("table"))
+			{
+				Elements rows = table.select("tr");
+				for (Element row : rows)
+				{
+					Elements tds = row.select("td");
+					if (tds.size() == 3)
+					{
+						builder.append("performStep(\"" + tds.get(0).html().toUpperCase()
+							+ "\", \"" + tds.get(1).html() + "\", \"" + tds.get(2).html() + "\");");
+						builder.append(System.getProperty("line.separator"));
+						builder.append("		");
+					}
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+
+		return builder.toString();
 	}
 
 	public static void cleanJavaTests(File javaTestsTargetDirectory, boolean cleanDirectories,
