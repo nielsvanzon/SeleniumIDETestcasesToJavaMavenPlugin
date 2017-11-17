@@ -133,8 +133,8 @@ public class Util
 					Elements tds = row.select("td");
 					if (tds.size() == 3)
 					{
-						builder.append("performStep(\"" + tds.get(0).html().toUpperCase()
-							+ "\", \"" + tds.get(1).html() + "\", \"" + tds.get(2).html() + "\");");
+						builder.append("performStep(\"" + tds.get(0).html().replace("\"","\\\"").toUpperCase()
+							+ "\", \"" + tds.get(1).html().replace("\"","\\\"") + "\", \"" + tds.get(2).html().replace("\"","\\\"") + "\");");
 						builder.append(System.getProperty("line.separator"));
 						builder.append("		");
 					}
